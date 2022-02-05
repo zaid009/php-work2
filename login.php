@@ -67,25 +67,32 @@ session_start();
                                 <input type="password" name="pass" placeholder="Password">
                                 <span class="icon_lock"></span>
                             </div>
-                            <?php
+                                                       <?php
+include 'connection.php';
+if(isset($_POST['btn']))
+{
+    $name=$_POST['name'];
+$pass= $_POST['pass']; 
+$query = mysqli_query($conn,"select * from reg_table where Name='$name'");
 
-                             include 'connection.php';
-                             if(isset($_POST['btn']))
-                             {
-                                 $name =$_POST['name'];
-                                 $pass =$_POST['pass'];
-                                 $query=mysqli_query($conn,"SELECT *from reg_table where Name ='$name' and password ='$pass' ");
-                                 $row =mysqli_num_rows($query);
-                                 if ($row==1) {
-                                    echo "<script>alert('Agaya tu Jawan hoke');window.location.href='index.php';</script>";
-                                    $_SESSION['login']=1;
-                                    $_SESSION['name']=$name;
-                                 } else {
-                                    echo "invalid name or password";
-                                 }
-                                 
-                             }
-                            ?>
+if (mysqli_num_rows($query)>0) { 
+while ($row = mysqli_fetch_assoc($query)) {
+	if (password_verify($pass, $row['password'])) {
+		$_SESSION['login']=1;
+		$_SESSION['name']=$name;
+		header('Location:index.php');
+
+	}
+	
+	}
+}
+else{   echo	"<script>alert('Please Enter Valid Name or Password');window.location.href='login.php';</script>";	
+
+}
+
+}
+
+?>
                             <button type="submit" name="btn" class="site-btn">Login Now</button>
                         </form>
                         <a href="#" class="forget_pass">Forgot Your Password?</a>
