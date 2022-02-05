@@ -67,7 +67,7 @@
                                 <input type="password" name="pass" placeholder="Password" required>
                                 <span class="icon_lock"></span>
                             </div>
-                            <?php
+                                <?php
                              include 'connection.php';
 if(isset($_POST['btn']))
 {
@@ -75,6 +75,7 @@ if(isset($_POST['btn']))
   $email =$_POST['email'];
   $pass =$_POST['pass'];
 
+  $pass=password_hash($pass, PASSWORD_BCRYPT);
   $query =mysqli_query($conn,"INSERT into reg_table values ('','$name','$email','$pass')");
   if($query){
 
