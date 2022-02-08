@@ -67,7 +67,7 @@
                                 <input type="password" name="pass" placeholder="Password" required>
                                 <span class="icon_lock"></span>
                             </div>
-                                <?php
+                            <?php
                              include 'connection.php';
 if(isset($_POST['btn']))
 {
