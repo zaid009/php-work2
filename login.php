@@ -60,14 +60,14 @@ session_start();
                         <h3>Login</h3>
                         <form action="login.php" method="POST">
                             <div class="input__item">
-                                <input type="text" name="name" placeholder="Email address">
+                                <input type="text" name="name" placeholder="username">
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
                                 <input type="password" name="pass" placeholder="Password">
                                 <span class="icon_lock"></span>
                             </div>
-                                                       <?php
+                            <?php
 include 'connection.php';
 if(isset($_POST['btn']))
 {
@@ -86,7 +86,7 @@ while ($row = mysqli_fetch_assoc($query)) {
 	
 	}
 }
-else{   echo	"<script>alert('Please Enter Valid Name or Password');window.location.href='login.php';</script>";	
+else{   echo "<script>alert('Please Enter Valid Name or Password');window.location.href='login.php';</script>";	
 
 }
 
